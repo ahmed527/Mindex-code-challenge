@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CodeChallenge.Models;
 using Microsoft.Extensions.Logging;
 using CodeChallenge.Repositories;
+using CodeChallenge.ViewModels;
 
 namespace CodeChallenge.Services
 {
@@ -40,6 +41,16 @@ namespace CodeChallenge.Services
             return null;
         }
 
+        public ReportingStructure GetReportingStructureByEmployeeId(string id)
+        {
+            if (!String.IsNullOrEmpty(id))
+            {
+                return _employeeRepository.GetReportingStructureByEmployeeId(id);
+            }
+
+            return null;
+        }
+
         public Employee Replace(Employee originalEmployee, Employee newEmployee)
         {
             if(originalEmployee != null)
@@ -59,5 +70,7 @@ namespace CodeChallenge.Services
 
             return newEmployee;
         }
+
+        
     }
 }

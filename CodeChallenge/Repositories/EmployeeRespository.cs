@@ -6,6 +6,7 @@ using CodeChallenge.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using CodeChallenge.Data;
+using CodeChallenge.ViewModels;
 
 namespace CodeChallenge.Repositories
 {
@@ -40,6 +41,34 @@ namespace CodeChallenge.Repositories
         public Employee Remove(Employee employee)
         {
             return _employeeContext.Remove(employee).Entity;
+        }
+
+        public ReportingStructure GetReportingStructureByEmployeeId(string id)
+        {
+          var employee=  _employeeContext.Employees.Include(e=>e.DirectReports).SingleOrDefault(e => e.EmployeeId == id);
+            var reportsCount = GetEmployeeReportsCount(employee);
+            employee.DirectReports = null;
+            return new ReportingStructure() { employee=employee,numberOfReports=reportsCount};
+        }
+
+        private int GetEmployeeReportsCount(Employee employee)
+        {
+            var reports = employee.DirectReports;
+
+            if (reports is null || ! reports.Any())
+            {
+                return 0;
+            }
+
+            var reportsCount = reports.Count();
+
+            foreach(var report in reports)
+            {
+                var emp = _employeeContext.Employees.Include(e => e.DirectReports).SingleOrDefault(e => e.EmployeeId == report.EmployeeId);
+                reportsCount += GetEmployeeReportsCount(emp);
+            }
+
+            return reportsCount; 
         }
     }
 }
