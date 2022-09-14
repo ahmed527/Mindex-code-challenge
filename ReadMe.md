@@ -83,5 +83,19 @@ Create a new type, Compensation. A Compensation has the following fields: employ
 two new Compensation REST endpoints. One to create and one to read by employeeId. These should persist and query the 
 Compensation from the persistence layer.
 
+
+
 ## Delivery
 Please upload your results to a publicly accessible Git repo. Free ones are provided by Github and Bitbucket.
+
+
+
+## My results screenshots:
+
+![image](https://user-images.githubusercontent.com/15823914/190214165-8ae5625d-2e1d-418b-ba8f-65a109859345.png)
+
+![image](https://user-images.githubusercontent.com/15823914/190214241-d61d7dda-f64b-476d-afe1-77be48492545.png)
+
+![image](https://user-images.githubusercontent.com/15823914/190214375-762cc505-36bb-4f9d-880d-93d9d65f6079.png)
+
+
